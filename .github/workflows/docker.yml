@@ -1,0 +1,23 @@
+name: Pull and Run Hello World
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  pull-and-run-hello-world:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Pull hello-world image
+        run: docker pull hello-world
+
+      - name: Run hello-world container
+        run: docker run hello-world
+
+      - name: Display output
+        run: docker logs $(docker ps -q -n1)
